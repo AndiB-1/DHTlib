@@ -32,7 +32,8 @@ timer2.start()
 while True:
     if timer2.get()>2500:
         sensor.read()
-        DHT22_hum_2 =  sensor.hum_22()
-        DHT22_temp_2 = sensor.temp_22()
+        DHT22_hum_2 =  sensor.hum()
+        DHT22_temp_2 = sensor.temp()
+        # alternatively to .read & .hum/.temp you can use temp,hum = xxx.getDHTdata()
         print(DHT22_temp_2,DHT22_hum_2)
         timer2.reset()

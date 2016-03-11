@@ -1,1 +1,1 @@
-{"whatsnew": "beta version, 1st release", "dependencies": {"core.zerynth.stdlib": "r1.0.0"}, "examples": ["DHTlib_example"], "name": "DHTlib"}
+{"examples": ["DHTlib_example"], "name": "DHTlib", "dependencies": {"core.zerynth.stdlib": "r1.0.0"}, "whatsnew": "improved the code, added new method \"getDHTdata()\""}

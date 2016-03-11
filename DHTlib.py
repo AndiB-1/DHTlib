@@ -138,12 +138,16 @@ class DHT22:
         timer1.clear()
 #         print("read done")
 
-    def temp_22(self):
+    def temp(self):
         return self.DHT22_temp
     
-    def hum_22(self):
+    def hum(self):
 #         print(self.DHT22_hum)
         return self.DHT22_hum
+
+    def getDHTdata(self):
+        self.read()
+        return(self.DHT22_temp, self.DHT22_hum)
 
 ##################################################################################################
 ##################################################################################################
@@ -197,7 +201,7 @@ class DHT11:
         for i in range(3,len(tmpICU),1):
             if i%2!=0: #these are the odd entries
                 timeListDHT11.append(tmpICU[i])
-#         print(timeListDHT22)
+#         print(timeListDHT11)
         # convert to list of binaries
         for i in range(len(timeListDHT11)):
             if timeListDHT11[i] < 35:    # shouldn't be longer than 28us, but allow some wiggle room here
@@ -205,7 +209,7 @@ class DHT11:
             else:
                 BinListDHT11.append(1)    
         # extract hum, temp parts (16bits each)
-        tmp_hum = BinListDHT11[0:8]    #1st 16 bits are humidity, 2nd 16 bits are temperature
+        tmp_hum = BinListDHT11[0:8]    #1st 8 bits are humidity, 2nd 8 bits are temperature
         tmp_temp = BinListDHT11[8:24]
         
         tmp_tempSign = 1
@@ -222,18 +226,20 @@ class DHT11:
             DHT11_temp_1 += tmp_temp[i]*(2**i)
             DHT11_hum_1 += tmp_hum[i]*(2**i)
             
-#         print(DHT22_temp_1/10,DHT22_hum_1/10)
         self.DHT11_temp = DHT11_temp_1
         self.DHT11_hum = DHT11_hum_1
-#         print(self.DHT22_temp, self.DHT22_hum)
+#         print(self.DHT11_temp, self.DHT11_hum)
         digitalWrite(self.receivepinShort, HIGH)
         timer1.clear()
 #         print("read done")
 
-    def temp_11(self):
+    def temp(self):
         return self.DHT11_temp
     
-    def hum_11(self):
-#         print(self.DHT22_hum)
+    def hum(self):
         return self.DHT11_hum
+    
+    def getDHTdata(self):
+        self.read()
+        return(self.DHT11_temp, self.DHT11_hum)
 
